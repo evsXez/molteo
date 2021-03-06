@@ -14,7 +14,7 @@ class MainpageBloc extends Bloc<MainpageEvent, MainpageState> {
     add(MainpageShown());
   }
 
-  BooksRepository get booksRepository => KiwiContainer().resolve<BooksRepository>();
+  BooksRepository get _booksRepository => KiwiContainer().resolve<BooksRepository>();
 
   @override
   Stream<MainpageState> mapEventToState(MainpageEvent event) async* {
@@ -23,7 +23,7 @@ class MainpageBloc extends Bloc<MainpageEvent, MainpageState> {
 
   Stream<MainpageState> _onShown() async* {
     try {
-      yield MainpageLoadSuccess(await booksRepository.getBooks());
+      yield MainpageLoadSuccess(await _booksRepository.getBooks());
     } catch (e) {
       yield MainpageLoadFailure();
       addError(e);
