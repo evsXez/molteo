@@ -1,9 +1,5 @@
 # //TODO:
 
-> main page: list of books with info (image, title, short description, ...)
->    - <s>create a repository</s>
->    - **create Bloc for main page**
->    - create UI for main page
 - click on item -> open details page (show as much info as you can)
 - tablet version
     - main page: two pads: left - the list, right - details
@@ -20,6 +16,7 @@
 
 ## DONE:
 
+- <s>main page: list of books with info (image, title, short description, ...)</s>
 - <s>write todo list</s>
 - <s>add dependencies</s>
 - <s>setup project structure</s>

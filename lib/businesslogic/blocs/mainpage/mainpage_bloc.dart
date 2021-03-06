@@ -10,7 +10,9 @@ part 'mainpage_event.dart';
 part 'mainpage_state.dart';
 
 class MainpageBloc extends Bloc<MainpageEvent, MainpageState> {
-  MainpageBloc() : super(MainpageInitial());
+  MainpageBloc() : super(MainpageInitial()) {
+    add(MainpageShown());
+  }
 
   BooksRepository get booksRepository => KiwiContainer().resolve<BooksRepository>();
 
@@ -20,7 +22,6 @@ class MainpageBloc extends Bloc<MainpageEvent, MainpageState> {
   }
 
   Stream<MainpageState> _onShown() async* {
-    yield MainpageLoadInProgress();
     try {
       yield MainpageLoadSuccess(await booksRepository.getBooks());
     } catch (e) {
