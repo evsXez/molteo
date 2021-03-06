@@ -1,6 +1,9 @@
 # //TODO:
 
 > main page: list of books with info (image, title, short description, ...)
+>    - <s>create a repository</s>
+>    - **create Bloc for main page**
+>    - create UI for main page
 - click on item -> open details page (show as much info as you can)
 - tablet version
     - main page: two pads: left - the list, right - details
