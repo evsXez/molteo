@@ -38,7 +38,7 @@ class BookModel {
     this.pdf,
   });
 
-  factory BookModel.fromJson(Map<dynamic, dynamic> json) {
+  factory BookModel.fromJson(json) {
     return BookModel(
       title: json['title'],
       subtitle: json['subtitle'],

@@ -8,7 +8,7 @@ class BooksRepositoryDummy extends BooksRepository {
   
   List<BookModel> dummyList() {
     final obj = json.decode(_DUMMY_DATA);
-    final List<Map<dynamic, dynamic>> books = obj['books'];
+    final List<dynamic> books = obj['books'];
     return books.map((it) => BookModel.fromJson(it)).toList();
   }
 

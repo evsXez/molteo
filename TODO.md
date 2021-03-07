@@ -1,7 +1,6 @@
 # //TODO:
 
-> show book info
-- click on item -> open details page (show as much info as you can)
+> click on item -> open details page (show as much info as you can)
 - tablet version
     - main page: two pads: left - the list, right - details
     - click on item -> update selected
@@ -9,6 +8,7 @@
 - sorting feature
 - search feature
 - add to favourites feature
+- make it nice
 
 ### tips:
 * structure in scalable way
@@ -18,6 +18,7 @@
 
 ## DONE:
 
+- <s>show book info</s>
 - <s>update BookModel fields</s>
 - <s>main page: list of books with info (image, title, short description, ...)</s>
 - <s>write todo list</s>
