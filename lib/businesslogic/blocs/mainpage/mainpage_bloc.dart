@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:meta/meta.dart';
-import 'package:molteo/data/models/BookModel.dart';
+import 'package:molteo/data/models/BookInfoModel.dart';
 import 'package:molteo/data/repositories/BooksRepository.dart';
 
 part 'mainpage_event.dart';

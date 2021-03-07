@@ -1,7 +1,10 @@
-import 'package:molteo/data/models/BookModel.dart';
+import 'package:molteo/data/models/BookInfoModel.dart';
+import 'package:molteo/data/models/DetailedBookInfoModel.dart';
 
 abstract class BooksRepository {
 
-  Future<List<BookModel>> getBooks();
-
+  Future<List<BookInfoModel>> getBooks();
+  
+  Future<DetailedBookInfoModel> getBookDetails();
+  
 }

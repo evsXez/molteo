@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:molteo/businesslogic/blocs/mainpage/mainpage_bloc.dart';
-import 'package:molteo/data/models/BookModel.dart';
+import 'package:molteo/data/models/BookInfoModel.dart';
 import 'package:molteo/presentation/widgets/BookListItem.dart';
 
 class MainPage extends StatelessWidget {
@@ -26,7 +26,7 @@ class MainPage extends StatelessWidget {
     },
   );
 
-  Widget books(List<BookModel> data) => ListView(
+  Widget books(List<BookInfoModel> data) => ListView(
     children: data.map((it) => BookListItem(it)).toList()
   );
 

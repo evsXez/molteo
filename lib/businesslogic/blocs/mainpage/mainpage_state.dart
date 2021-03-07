@@ -5,7 +5,7 @@ abstract class MainpageState {}
 
 class MainpageInitial extends MainpageState {}
 class MainpageLoadSuccess extends MainpageState {
-  final List<BookModel> books;
+  final List<BookInfoModel> books;
   MainpageLoadSuccess(this.books);
 }
 class MainpageLoadFailure extends MainpageState {}

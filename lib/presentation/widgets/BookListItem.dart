@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:molteo/data/models/BookModel.dart';
+import 'package:molteo/data/models/BookInfoModel.dart';
 
 class BookListItem extends StatelessWidget {
 
-  final BookModel book;
+  final BookInfoModel book;
   BookListItem(this.book);
 
   @override
