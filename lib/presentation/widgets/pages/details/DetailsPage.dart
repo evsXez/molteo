@@ -14,7 +14,9 @@ class DetailsPage extends StatelessWidget {
     return Scaffold(
       body: SafeArea(child: BlocProvider(
         create: (context) => DetailspageBloc(),
-        child: Column(
+        child: book == null 
+          ? placeholder
+          : Column(
           children: [
             title,
             subtitle,
@@ -26,6 +28,8 @@ class DetailsPage extends StatelessWidget {
       ),
     ));
   }
+
+  Widget get placeholder => Center(child: Text("PLACEHOLDER"),);
 
   Widget get title => Text(book.title);
   Widget get subtitle => Text(book.subtitle);
