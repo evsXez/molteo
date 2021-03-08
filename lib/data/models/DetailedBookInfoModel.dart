@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:molteo/data/models/BookInfoModel.dart';
 
 import 'BookChapterModel.dart';
@@ -40,24 +42,25 @@ class DetailedBookInfoModel extends BookInfoModel {
     url: url,
   );
 
-  factory DetailedBookInfoModel.fromJson(json) {
+  factory DetailedBookInfoModel.fromJson(String source) {
+    final obj = json.decode(source);
     return DetailedBookInfoModel(
-      title: json['title'],
-      subtitle: json['subtitle'],
-      isbn13: json['isbn13'],
-      price: json['price'],
-      image: json['image'],
-      url: json['url'],
+      title: obj['title'],
+      subtitle: obj['subtitle'],
+      isbn13: obj['isbn13'],
+      price: obj['price'],
+      image: obj['image'],
+      url: obj['url'],
  
-      authors: json['authors'],
-      publisher: json['publisher'],
-      language: json['language'],
-      isbn10: json['isbn10'],
-      pages: json['pages'],
-      year: json['year'],
-      rating: json['rating'],
-      desc: json['desc'],
-      pdf: BookChapterModel.fromJsonList(json['pdf']),
+      authors: obj['authors'],
+      publisher: obj['publisher'],
+      language: obj['language'],
+      isbn10: obj['isbn10'],
+      pages: obj['pages'],
+      year: obj['year'],
+      rating: obj['rating'],
+      desc: obj['desc'],
+      pdf: BookChapterModel.fromJsonList(obj['pdf']),
     );
   }
 

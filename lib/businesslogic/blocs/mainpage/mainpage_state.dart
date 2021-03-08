@@ -9,3 +9,7 @@ class MainpageLoadSuccess extends MainpageState {
   MainpageLoadSuccess(this.books);
 }
 class MainpageLoadFailure extends MainpageState {}
+class MainpageOpenBookDetails extends MainpageState {
+  final BookInfoModel book;
+  MainpageOpenBookDetails(this.book);
+}

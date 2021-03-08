@@ -1,13 +1,13 @@
 # //TODO:
 
-> click on item -> open details page (show as much info as you can)
-- tablet version
-    - main page: two pads: left - the list, right - details
-    - click on item -> update selected
+> tablet version
+>    - **main page: two pads: left - the list, right - details**
+>    - click on item -> update selected
 - implement network repository
 - sorting feature
 - search feature
-- add to favourites feature
+- error cases/retry/?
+- cache downloaded books
 - make it nice
 
 ### tips:
@@ -18,6 +18,7 @@
 
 ## DONE:
 
+- <s>click on item -> open details page (show as much info as you can)</s>
 - <s>show book info</s>
 - <s>update BookModel fields</s>
 - <s>main page: list of books with info (image, title, short description, ...)</s>

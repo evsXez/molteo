@@ -19,6 +19,7 @@ class MainpageBloc extends Bloc<MainpageEvent, MainpageState> {
   @override
   Stream<MainpageState> mapEventToState(MainpageEvent event) async* {
     if (event is MainpageShown) yield* _onShown();
+    if (event is MainpageBookClicked) yield MainpageOpenBookDetails(event.book);
   }
 
   Stream<MainpageState> _onShown() async* {

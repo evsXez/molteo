@@ -20,7 +20,10 @@ class BooksRepositoryDummy extends BooksRepository {
 
   @override
   Future<DetailedBookInfoModel> getBookDetails() {
-    return Future.delayed(Duration(seconds: 3), () => DetailedBookInfoModel.fromJson(_DUMMY_DETAILS));
+    return Future.delayed(Duration(seconds: 2), () => 
+      DetailedBookInfoModel.fromJson(_DUMMY_DETAILS)
+      // DetailedBookInfoModel(authors: "AUTHORS")
+    );
   }
 
 }
