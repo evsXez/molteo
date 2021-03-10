@@ -31,7 +31,7 @@ class ListpageBloc extends Bloc<ListpageEvent, ListpageState> {
 
   Stream<ListpageState> _onShown() async* {
     try {
-      yield ListpageLoadSuccess(await _booksRepository.getBooks());
+      yield ListpageLoadSuccess(await _booksRepository.getNewBooks());
     } catch (e) {
       yield ListpageLoadFailure();
       addError(e);

@@ -1,10 +1,11 @@
 # //TODO:
 
-- implement network repository
+> implement network repository
 - sorting feature
 - search feature
 - error cases/retry/?
 - cache downloaded books
+- refactor/clean?
 - make it nice
 
 ### tips:

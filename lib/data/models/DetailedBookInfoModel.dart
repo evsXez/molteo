@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:molteo/data/models/BookInfoModel.dart';
 
 import 'BookChapterModel.dart';
@@ -42,8 +40,7 @@ class DetailedBookInfoModel extends BookInfoModel {
     url: url,
   );
 
-  factory DetailedBookInfoModel.fromJson(String source) {
-    final obj = json.decode(source);
+  factory DetailedBookInfoModel.fromJson(Map<dynamic, dynamic> obj) {
     return DetailedBookInfoModel(
       title: obj['title'],
       subtitle: obj['subtitle'],

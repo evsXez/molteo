@@ -16,7 +16,7 @@ class BookInfoModel {
     this.url,
   });
 
-  factory BookInfoModel.fromJson(json) {
+  factory BookInfoModel.fromJson(Map<dynamic, dynamic> json) {
     return BookInfoModel(
       title: json['title'],
       subtitle: json['subtitle'],
