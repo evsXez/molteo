@@ -10,7 +10,7 @@ class BooksRepositoryNetwork extends BooksRepository {
   }
 
   @override
-  Future<DetailedBookInfoModel> getBookDetails() {
+  Future<DetailedBookInfoModel> getBookDetails(String isbn13) {
     throw UnimplementedError();
   }
 

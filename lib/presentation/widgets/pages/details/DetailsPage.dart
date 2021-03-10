@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:molteo/businesslogic/blocs/detailspage/detailspage_bloc.dart';
+import 'package:kiwi/kiwi.dart';
+import 'package:molteo/blocs/detailspage/detailspage_bloc.dart';
 import 'package:molteo/data/models/BookInfoModel.dart';
 import 'BookDetails.dart';
 
@@ -12,21 +13,23 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: BlocProvider(
-        create: (context) => DetailspageBloc(),
-        child: book == null 
+      body: BlocProvider(
+        create: (_) => KiwiContainer().resolve<DetailspageBloc>(),
+        child: SafeArea(child: book == null 
           ? placeholder
           : Column(
-          children: [
-            title,
-            subtitle,
-            isbn13,
-            price,
-            image,
-            details,
-          ],),
+              children: [
+                title,
+                subtitle,
+                isbn13,
+                price,
+                image,
+                details,
+              ],
+            ),
+        ),
       ),
-    ));
+    );
   }
 
   Widget get placeholder => Center(child: Text("PLACEHOLDER"),);

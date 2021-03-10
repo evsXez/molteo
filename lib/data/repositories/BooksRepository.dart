@@ -5,6 +5,6 @@ abstract class BooksRepository {
 
   Future<List<BookInfoModel>> getBooks();
   
-  Future<DetailedBookInfoModel> getBookDetails();
+  Future<DetailedBookInfoModel> getBookDetails(String isbn13);
   
 }

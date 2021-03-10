@@ -1,8 +1,9 @@
 # //TODO:
 
 > tablet version
->    - **main page: two pads: left - the list, right - details**
->    - click on item -> update selected
+>    - <s>main page: two pads: left - the list, right - details</s>
+>    - <s>click on item -> update selected</s>
+>   - **on phone - hjust navigation and all should work**
 - implement network repository
 - sorting feature
 - search feature

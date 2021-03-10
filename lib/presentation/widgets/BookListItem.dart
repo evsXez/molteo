@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:molteo/businesslogic/blocs/mainpage/mainpage_bloc.dart';
+import 'package:molteo/blocs/listpage/listpage_bloc.dart';
 import 'package:molteo/data/models/BookInfoModel.dart';
 
 class BookListItem extends StatelessWidget {
@@ -12,7 +12,7 @@ class BookListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        onTap: () => BlocProvider.of<MainpageBloc>(context).add(MainpageBookClicked(book)),
+        onTap: () => BlocProvider.of<ListpageBloc>(context).add(ListpageItemClicked(book)),
         leading: image,
         title: Text(book.title),
         subtitle: Text(book.subtitle),

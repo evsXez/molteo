@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kiwi/kiwi.dart';
+import 'package:molteo/blocs/detailspage/detailspage_bloc.dart';
 
 import 'data/repositories/BooksRepository.dart';
 import 'data/repositories/dummy/BooksRepositoryDummy.dart';
@@ -12,4 +13,5 @@ void main() {
 
 void assemble() {
   KiwiContainer().registerInstance<BooksRepository>(BooksRepositoryDummy());
+  KiwiContainer().registerInstance<DetailspageBloc>(DetailspageBloc());
 }
