@@ -30,4 +30,10 @@ class DetailspageBloc extends Bloc<DetailspageEvent, DetailspageState> {
     }
   }
 
+  @override
+  Future<void> close() {
+    print("Details Bloc closed, no add()s anymore... ");
+    return super.close();
+  }
+
 }

@@ -13,9 +13,7 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocProvider(
-        create: (_) => KiwiContainer().resolve<DetailspageBloc>(),
-        child: SafeArea(child: book == null 
+      body: SafeArea(child: book == null 
           ? placeholder
           : Column(
               children: [
@@ -28,7 +26,6 @@ class DetailsPage extends StatelessWidget {
               ],
             ),
         ),
-      ),
     );
   }
 
@@ -40,12 +37,15 @@ class DetailsPage extends StatelessWidget {
   Widget get price => Text(book.price);
   Widget get image => Image.network(book.image, width: 120, height: 120);
 
-  Widget get details => BlocBuilder<DetailspageBloc, DetailspageState>(builder: (context, state) {
-    if (state is DetailspageInitial) return CircularProgressIndicator();
-    if (state is DetailspageLoadFailure) return Text("ERROR");
-    if (state is DetailspageLoadSuccess) return BookDetails(state.bookDetails);
-    return Container(color: Colors.red);
-  });
+  Widget get details => BlocBuilder<DetailspageBloc, DetailspageState>(
+    cubit: KiwiContainer().resolve<DetailspageBloc>(),
+    builder: (context, state) {
+      if (state is DetailspageInitial) return CircularProgressIndicator();
+      if (state is DetailspageLoadFailure) return Text("ERROR");
+      if (state is DetailspageLoadSuccess) return BookDetails(state.bookDetails);
+      return Container(color: Colors.red);
+    }
+  );
 
 
 

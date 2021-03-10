@@ -1,9 +1,5 @@
 # //TODO:
 
-> tablet version
->    - <s>main page: two pads: left - the list, right - details</s>
->    - <s>click on item -> update selected</s>
->   - **on phone - hjust navigation and all should work**
 - implement network repository
 - sorting feature
 - search feature
@@ -19,6 +15,7 @@
 
 ## DONE:
 
+- <s>tablet version</s>
 - <s>click on item -> open details page (show as much info as you can)</s>
 - <s>show book info</s>
 - <s>update BookModel fields</s>
