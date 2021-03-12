@@ -13,4 +13,7 @@ class SearchSuccessFinalPage extends SearchState {
   final List<BookInfoModel> books;
   SearchSuccessFinalPage(this.books);
 }
-class SearchFailed extends SearchState {}
+class SearchFailed extends SearchState {
+  final List<BookInfoModel> books;
+  SearchFailed(this.books);
+}

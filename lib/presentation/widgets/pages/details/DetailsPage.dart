@@ -3,12 +3,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:molteo/blocs/detailspage/detailspage_bloc.dart';
 import 'package:molteo/data/models/BookInfoModel.dart';
+import 'package:molteo/presentation/widgets/common/RetryButton.dart';
 import 'BookDetails.dart';
 
 class DetailsPage extends StatelessWidget {
 
   final BookInfoModel book;
   DetailsPage(this.book);
+
+  DetailspageBloc get detailspageBloc => KiwiContainer().resolve<DetailspageBloc>();
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +41,10 @@ class DetailsPage extends StatelessWidget {
   Widget get image => Image.network(book.image, width: 120, height: 120);
 
   Widget get details => BlocBuilder<DetailspageBloc, DetailspageState>(
-    cubit: KiwiContainer().resolve<DetailspageBloc>(),
+    cubit: detailspageBloc,
     builder: (context, state) {
       if (state is DetailspageInitial) return CircularProgressIndicator();
-      if (state is DetailspageLoadFailure) return Text("ERROR");
+      if (state is DetailspageLoadFailure) return RetryButton(() => detailspageBloc.add(DetailspageRetry()));
       if (state is DetailspageLoadSuccess) return BookDetails(state.bookDetails);
       return Container(color: Colors.red);
     }

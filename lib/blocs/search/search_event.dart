@@ -21,3 +21,6 @@ class SearchRequestedMore extends SearchEvent {
   @override List<Object> get props => [salt];
 }
 
+class SearchRetry extends SearchEvent {}
+
+

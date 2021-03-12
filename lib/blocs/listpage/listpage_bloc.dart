@@ -22,8 +22,6 @@ class ListpageBloc extends Bloc<ListpageEvent, ListpageState> {
   DetailspageBloc get detailspageBloc => KiwiContainer().resolve<DetailspageBloc>();
 
 
-  
-
   @override
   Stream<ListpageState> mapEventToState(ListpageEvent event) async* {
     if (event is ListpageShown) yield* _onShown();
@@ -31,6 +29,7 @@ class ListpageBloc extends Bloc<ListpageEvent, ListpageState> {
       yield ListpageShowBookDetails(event.book);
       detailspageBloc.add(DetailspageShown(event.book));
     }
+    if (event is ListpageRetry) yield* _onRetry();
   }
 
   Stream<ListpageState> _onShown() async* {
@@ -40,6 +39,11 @@ class ListpageBloc extends Bloc<ListpageEvent, ListpageState> {
       yield ListpageLoadFailure();
       addError(e);
     }
+  }
+
+  Stream<ListpageState> _onRetry() async* {
+    yield ListpageInitial();
+    add(ListpageShown());
   }
 
 

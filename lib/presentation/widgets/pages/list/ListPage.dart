@@ -5,8 +5,13 @@ import 'package:molteo/blocs/listpage/listpage_bloc.dart';
 import 'package:molteo/blocs/search/search_bloc.dart';
 import 'package:molteo/data/models/BookInfoModel.dart';
 import 'package:molteo/presentation/widgets/BookListItem.dart';
+import 'package:molteo/presentation/widgets/common/RetryButton.dart';
 
 class ListPage extends StatelessWidget {
+
+  SearchBloc get searchBloc => KiwiContainer().resolve<SearchBloc>();
+  ListpageBloc get listpageBloc => KiwiContainer().resolve<ListpageBloc>();
+
   @override
   Widget build(BuildContext context) {
     return listOfBooks;
@@ -16,6 +21,7 @@ class ListPage extends StatelessWidget {
     builder: (context, state) {
       if (state is SearchSuccessHasMore) return booksHasMore(state.books);
       if (state is SearchSuccessFinalPage) return books(state.books);
+      if (state is SearchFailed) return booksFailedRetry(state.books);
       return listBuilder;
     }
   );
@@ -25,7 +31,7 @@ class ListPage extends StatelessWidget {
     builder: (context, state) {
       if (state is ListpageInitial) return Center(child: CircularProgressIndicator());
       if (state is ListpageLoadSuccess) return books(state.books);
-      if (state is ListpageLoadFailure) return Center(child: Text("ERROR"),);
+      if (state is ListpageLoadFailure) return RetryButton(() { listpageBloc.add(ListpageRetry()); });
       return Container(color: Colors.red);
     },
   );
@@ -38,8 +44,16 @@ class ListPage extends StatelessWidget {
     itemCount: data.length+1,
     itemBuilder: (context, index) {
       if (index < data.length) return BookListItem(data[index]);
-      KiwiContainer().resolve<SearchBloc>().add(SearchRequestedMore());
+      searchBloc.add(SearchRequestedMore());
       return Center(child: CircularProgressIndicator());
+    }
+  );
+
+  Widget booksFailedRetry(List<BookInfoModel> data) => ListView.builder(
+    itemCount: data.length+1,
+    itemBuilder: (context, index) {
+      if (index < data.length) return BookListItem(data[index]);
+      return RetryButton(() { searchBloc.add(SearchRetry()); });
     }
   );
 

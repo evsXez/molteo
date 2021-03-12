@@ -7,3 +7,5 @@ class DetailspageShown extends DetailspageEvent {
   final BookInfoModel book;
   DetailspageShown(this.book);
 }
+
+class DetailspageRetry extends DetailspageEvent {}

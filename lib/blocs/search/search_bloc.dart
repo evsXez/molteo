@@ -30,32 +30,49 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
 
   @override
   Stream<SearchState> mapEventToState(SearchEvent event) async* {
-    if (event is SearchRequested) yield* _onSearch(request: event.request);
-    if (event is SearchRequestedMore) yield* _onSearch(isFirstPage: false);
+    if (event is SearchRequested) yield* _onSearch(event.request);
+    if (event is SearchRequestedMore) yield* _onSearchMore();
+    if (event is SearchRetry) yield* _onSearchRetry();
   }
 
-  Stream<SearchState> _onSearch({String request, bool isFirstPage = true}) async* {
-    if (isFirstPage && _searchData.request == request) return;
+  Stream<SearchState> _onSearch(String request) async* {
+    if (_searchData.request == request) return;
+
     try {
-      if (isFirstPage) {
-        print("== onSearch: $request");
-        _searchData.request = request;
-        _searchData.page = 0;
-        _searchData.data.clear();
-      } else {
-        _searchData.page++;
-      }
+      print("== onSearch: $request");
+      _searchData.request = request;
+      _searchData.page = 0;
+      _searchData.data.clear();
       final searchPortion = await _booksRepository.searchBooks(_searchData.request, _searchData.page);
+      _searchData.data = searchPortion.data;
+      if (searchPortion.hasMore)
+        yield SearchSuccessHasMore(_searchData.data);
+      else
+        yield SearchSuccessFinalPage(_searchData.data);
+    } catch (e) {
+      yield SearchFailed(_searchData.data);
+      addError(e);
+    }
+  }
+
+  Stream<SearchState> _onSearchMore() async* {
+    try {
+      final searchPortion = await _booksRepository.searchBooks(_searchData.request, _searchData.page++);
       _searchData.data.addAll(searchPortion.data);
       if (searchPortion.hasMore)
         yield SearchSuccessHasMore(_searchData.data);
       else
         yield SearchSuccessFinalPage(_searchData.data);
     } catch (e) {
-      yield SearchFailed();
+      yield SearchFailed(_searchData.data);
       addError(e);
     }
   }
+
+  Stream<SearchState> _onSearchRetry() async* {
+    yield SearchSuccessHasMore(_searchData.data);
+  }
+
 
 }
 

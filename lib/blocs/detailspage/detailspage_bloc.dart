@@ -13,15 +13,19 @@ part 'detailspage_state.dart';
 class DetailspageBloc extends Bloc<DetailspageEvent, DetailspageState> {
   DetailspageBloc() : super(DetailspageInitial());
 
+  BookInfoModel _currentBook;
+
   BooksRepository get _booksRepository => KiwiContainer().resolve<BooksRepository>();
 
   @override
   Stream<DetailspageState> mapEventToState(DetailspageEvent event) async* {
     if (event is DetailspageShown) yield* _onShown(event.book);
+    if (event is DetailspageRetry) yield* _onShown(_currentBook);
   }
 
   Stream<DetailspageState> _onShown(BookInfoModel book) async* {
     try {
+      _currentBook = book;
       yield DetailspageInitial();
       yield DetailspageLoadSuccess(await _booksRepository.getBookDetails(book.isbn13));
     } catch (e) {

@@ -1,8 +1,7 @@
 # //TODO:
 
-> search feature
-- error cases/retry/?
 - cache downloaded books
+- empty search request -> show new (add clear button)
 - refactor/clean?
 - make it nice
 
@@ -14,6 +13,8 @@
 
 ## DONE:
 
+- <s>error cases/retry/?</s>
+- <s>search feature</s>
 - <s>implement network repository</s>
 - <s>tablet version</s>
 - <s>click on item -> open details page (show as much info as you can)</s>

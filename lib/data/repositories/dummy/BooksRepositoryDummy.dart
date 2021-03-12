@@ -16,21 +16,29 @@ class BooksRepositoryDummy extends BooksRepository {
 
   @override
   Future<List<BookInfoModel>> getNewBooks() {
-    return Future.delayed(Duration(seconds: 2), () => _dummyList());
+    return Future.delayed(Duration(seconds: 2), () {
+      // throw 'test';
+      return _dummyList();
+      }
+    );
   }
 
   @override
   Future<DetailedBookInfoModel> getBookDetails(String isbn13) {
-    return Future.delayed(Duration(seconds: 2), () =>
-      DetailedBookInfoModel.fromJson(json.decode(_DUMMY_DETAILS))
+    return Future.delayed(Duration(seconds: 2), () {
+      // throw 'test';
+      return DetailedBookInfoModel.fromJson(json.decode(_DUMMY_DETAILS));
+    }
     );
   }
 
   @override
   Future<SearchResponsePortion<BookInfoModel>> searchBooks(String request, int page) async {
-    return Future.delayed(Duration(seconds: 2), () =>
-      SearchResponsePortion(_dummyList(), true)
-    );
+    print("??? page: $page");
+    return Future.delayed(Duration(seconds: 2), () {
+      // throw 'test';
+      return SearchResponsePortion(_dummyList(), true);
+    });
   }
 
 

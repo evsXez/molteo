@@ -13,3 +13,4 @@ class ListpageItemClicked extends ListpageEvent {
   @override List<Object> get props => [book];
 }
 
+class ListpageRetry extends ListpageEvent {}
