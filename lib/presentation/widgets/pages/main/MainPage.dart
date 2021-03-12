@@ -50,12 +50,12 @@ class _MainPageState extends State<MainPage> {
                 buildWhen: (prev, current) => current is ListpageShowBookDetails,
                 builder: (context, state) {
                   final BookInfoModel book = state is ListpageShowBookDetails ? state.book : null;
-                  final flex = Utils.detailsFlex(context);
-                  return flex == null
+                  final flexPair = Utils.detailsFlex(context);
+                  return flexPair == null
                       ? ListPage()
                       : Row(children: [
-                          Expanded(flex: 1, child: ListPage()),
-                          Expanded(flex: flex, child: DetailsPage(book)),
+                          Expanded(flex: flexPair.sum-flexPair.value, child: ListPage()),
+                          Expanded(flex: flexPair.value, child: DetailsPage(book)),
                         ]);
                 }
               ),
@@ -70,6 +70,7 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget get appBar => AppBar(
+    // backgroundColor: Colors.black.withAlpha(40),
     title: Row(
       children: [
         Icon(Icons.search),

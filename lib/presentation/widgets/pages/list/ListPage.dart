@@ -4,7 +4,7 @@ import 'package:kiwi/kiwi.dart';
 import 'package:molteo/blocs/listpage/listpage_bloc.dart';
 import 'package:molteo/data/models/BookInfoModel.dart';
 import 'package:molteo/presentation/utils/Strings.dart';
-import 'package:molteo/presentation/widgets/BookListItem.dart';
+import 'package:molteo/presentation/widgets/pages/list/BookListItem.dart';
 import 'package:molteo/presentation/widgets/common/RetryButton.dart';
 
 class ListPage extends StatelessWidget {
@@ -45,7 +45,7 @@ class ListPage extends StatelessWidget {
     itemBuilder: (context, index) {
       if (index < data.length) return BookListItem(data[index]);
       listpageBloc.add(SearchRequestedMore());
-      return Center(child: CircularProgressIndicator());
+      return LinearProgressIndicator();
     }
   );
 

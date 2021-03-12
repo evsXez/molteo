@@ -7,6 +7,8 @@ class BookInfoModel {
   final String image;
   final String url;
 
+  bool get isFree => price == r"$0.00";
+
   BookInfoModel({
     this.title,
     this.subtitle,

@@ -1,7 +1,7 @@
 # //TODO:
 
-> refactor/clean?
-- make it nice
+> make it nice
+- refactor/clean?
 
 ### tips:
 * structure in scalable way

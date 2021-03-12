@@ -8,9 +8,12 @@ class RetryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-    onPressed: onPressed,
-    child: Text(Strings.error_retry),
-  );
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+        onPressed: onPressed,
+        child: Text(Strings.error_retry),
+      ),
+    );
   }
 }
