@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kiwi/kiwi.dart';
 import 'package:molteo/blocs/listpage/listpage_bloc.dart';
-import 'package:molteo/blocs/search/search_bloc.dart';
 import 'package:molteo/data/models/BookInfoModel.dart';
 import 'package:molteo/presentation/navigation/Navigation.dart';
 import 'package:molteo/presentation/utils/Strings.dart';
@@ -10,19 +9,25 @@ import 'package:molteo/presentation/utils/Utils.dart';
 import 'package:molteo/presentation/widgets/pages/details/DetailsPage.dart';
 import 'package:molteo/presentation/widgets/pages/list/ListPage.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
 
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
   final searchController = TextEditingController();
 
-  SearchBloc get searchBloc => KiwiContainer().resolve<SearchBloc>();
   ListpageBloc get listpageBloc => KiwiContainer().resolve<ListpageBloc>();
 
-  MainPage() {
+  @override
+  void initState() {
     searchController.addListener(() {
       final text = searchController.text;
-      searchBloc.add(SearchRequested(text));
-      if (text.isEmpty) listpageBloc.add(ListpageRetry());
+      listpageBloc.add(SearchRequested(text));
+      if (text.isEmpty) listpageBloc.add(SearchCleared());
     });
+    super.initState();
   }
 
   @override
@@ -31,13 +36,16 @@ class MainPage extends StatelessWidget {
         navigatorKey: navigatorKey,
         home: Scaffold(
           appBar: appBar,
-          body: MultiBlocProvider(
-              providers: [
-                BlocProvider(create: (_) => searchBloc),
-                BlocProvider(create: (_) => listpageBloc),
-              ],
+          body: BlocProvider(
+              create: (_) => listpageBloc,
               child: BlocListener<ListpageBloc, ListpageState>(
-              listener: (context, state) { if (state is ListpageShowBookDetails) openDetails(Utils.detailsFlex(context) != null, state.book); },
+              listener: (context, state) { 
+                if (state is ListpageShowBookDetails) openDetails(Utils.detailsFlex(context) != null, state.book); 
+                if (state is ListpageClearSearch) {
+                  FocusScope.of(context).unfocus();
+                  setState(() { searchController.text = ""; });
+                } 
+              },
               child: BlocBuilder<ListpageBloc, ListpageState>(
                 buildWhen: (prev, current) => current is ListpageShowBookDetails,
                 builder: (context, state) {
@@ -69,7 +77,6 @@ class MainPage extends StatelessWidget {
         Expanded(child: TextField(controller: searchController, decoration: InputDecoration(hintText: Strings.search_hint), style: TextStyle(color: Colors.white),)),
       ],
     ),
-    // actions: [IconButton(icon: Icons.search, onPressed: () => )],
+    actions: [IconButton(icon: Icon(Icons.clear), onPressed: () { listpageBloc.add(ListpageShown()); })],
   );
-
 }

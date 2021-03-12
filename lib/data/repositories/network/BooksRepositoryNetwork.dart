@@ -35,7 +35,8 @@ class BooksRepositoryNetwork extends BooksRepository {
       final modifiedRequest = request; //TODO: remove spaces/add quotes/...
       final response = await _dio.get("/search/$modifiedRequest/$page");
       final list = _parseBooks(response.data);
-      final hasMore = !list.isEmpty;//response.total > 
+      final total = int.parse(response.data['total']);
+      final hasMore = list.isNotEmpty && total > list.length;
       return SearchResponsePortion(list, hasMore);
     } catch (e) { rethrow; }
   }
