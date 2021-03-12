@@ -3,8 +3,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 class Utils {
 
-  
-
   static bool isWide(BuildContext context) => MediaQuery.of(context).size.width >= 800;
   
   static FlexPair detailsFlex(BuildContext context) {
@@ -17,7 +15,6 @@ class Utils {
 }
 
 void launchURL(String url) async => await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
-
 
 class FlexPair {
   final int value;

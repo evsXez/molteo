@@ -1,7 +1,6 @@
 # //TODO:
 
-> make it nice
-- refactor/clean?
+> refactor/clean?
 
 ### tips:
 * structure in scalable way
@@ -11,6 +10,7 @@
 
 ## DONE:
 
+- <s>make it nice</s>
 - <s>empty search request -> show new (add clear button)</s>
 - <s>cache downloaded books</s>
 - <s>error cases/retry/?</s>

@@ -33,6 +33,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         navigatorKey: navigatorKey,
         home: Scaffold(
           appBar: appBar,
@@ -41,10 +42,7 @@ class _MainPageState extends State<MainPage> {
               child: BlocListener<ListpageBloc, ListpageState>(
               listener: (context, state) { 
                 if (state is ListpageShowBookDetails) openDetails(Utils.detailsFlex(context) != null, state.book); 
-                if (state is ListpageClearSearch) {
-                  FocusScope.of(context).unfocus();
-                  setState(() { searchController.text = ""; });
-                } 
+                if (state is ListpageClearSearch) clearSearch(context);
               },
               child: BlocBuilder<ListpageBloc, ListpageState>(
                 buildWhen: (prev, current) => current is ListpageShowBookDetails,
@@ -66,11 +64,16 @@ class _MainPageState extends State<MainPage> {
 
   void openDetails(bool isTwoPaneMode, BookInfoModel book) {
     if (isTwoPaneMode) return;
-    navigation.push(MaterialPageRoute(builder: (context) => DetailsPage(book),));
+    FocusScope.of(context).unfocus();
+    navigation.push(MaterialPageRoute(builder: (context) => DetailsPage(book),)); 
+  }
+
+  void clearSearch(BuildContext context) {
+    FocusScope.of(context).unfocus();
+    setState(() { searchController.text = ""; });
   }
 
   Widget get appBar => AppBar(
-    // backgroundColor: Colors.black.withAlpha(40),
     title: Row(
       children: [
         Icon(Icons.search),

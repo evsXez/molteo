@@ -60,8 +60,6 @@ class BookListItem extends StatelessWidget {
 
   Widget get price => Price(book);
 
-  Color get priceColor => book.isFree ? Colors.blue : Colors.red;
-
   Widget get image {
     final k = 4.0;
     final double W = 30*k;
@@ -81,7 +79,7 @@ class BookListItem extends StatelessWidget {
         ),
       );
   }
-  // Widget get image => Container(color: Colors.grey.withAlpha(128), width: 50, height: 50,);
+
   void onTap() => KiwiContainer().resolve<ListpageBloc>().add(ListpageItemClicked(book));
 
 }

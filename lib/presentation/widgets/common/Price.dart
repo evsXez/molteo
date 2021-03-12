@@ -20,8 +20,6 @@ class Price extends StatelessWidget {
     );
   }
 
-  
-
   Gradient get priceGradient => book.isFree 
     ? LinearGradient(colors: [Colors.blue, Colors.lightBlueAccent])
     : LinearGradient(colors: [Colors.red, Colors.amber]);

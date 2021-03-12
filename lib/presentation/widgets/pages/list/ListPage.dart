@@ -35,7 +35,7 @@ class ListPage extends StatelessWidget {
   );
 
   Widget books(List<BookInfoModel> data) => data.isEmpty 
-    ? Center(child: Text(Strings.label_no_results))
+    ? Center(child: Text(Strings.label_no_results, style: TextStyle(fontSize: 18, color: Colors.grey)))
     : ListView(
       children: data.map((it) => BookListItem(it)).toList()
     );

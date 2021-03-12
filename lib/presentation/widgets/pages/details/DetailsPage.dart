@@ -93,10 +93,7 @@ class DetailsPage extends StatelessWidget {
   Widget get details => BlocBuilder<DetailspageBloc, DetailspageState>(
     cubit: detailspageBloc,
     builder: (context, state) {
-      if (state is DetailspageInitial) return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: LinearProgressIndicator(),
-      );
+      if (state is DetailspageInitial) return progress;
       if (state is DetailspageLoadFailure) return RetryButton(() => detailspageBloc.add(DetailspageRetry()));
       if (state is DetailspageLoadSuccess) return BookDetails(state.bookDetails);
       return Container(color: Colors.red);
@@ -104,6 +101,7 @@ class DetailsPage extends StatelessWidget {
   );
 
   Widget get price => GestureDetector(onTap: onTap, child: Price(book, fontSize: 22));
+  Widget get progress => Padding(padding: const EdgeInsets.symmetric(vertical: 8.0), child: LinearProgressIndicator(),);
 
   void onTap() => launchURL(book.url);
 
