@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:molteo/data/models/BookInfoModel.dart';
 import 'package:molteo/data/models/DetailedBookInfoModel.dart';
 import 'package:molteo/data/models/SearchResponsePortion.dart';
@@ -5,6 +7,8 @@ import 'package:molteo/data/repositories/BooksRepository.dart';
 import 'package:dio/dio.dart';
 
 class BooksRepositoryNetwork extends BooksRepository {
+
+  final _cache = HashMap<String, DetailedBookInfoModel>();
 
   Dio _dio;
 
@@ -38,9 +42,12 @@ class BooksRepositoryNetwork extends BooksRepository {
 
   @override
   Future<DetailedBookInfoModel> getBookDetails(String isbn13) async {
+    if (_cache.containsKey(isbn13)) return _cache[isbn13];
     try {
       final response = await _dio.get("/books/$isbn13");
-      return _parseBookDetails(response.data);
+      final result = _parseBookDetails(response.data);
+      _cache.addAll({isbn13: result});
+      return result;
     } catch (e) { rethrow; }
   }
 
