@@ -14,9 +14,14 @@ class MainPage extends StatelessWidget {
 
   final searchController = TextEditingController();
 
+  SearchBloc get searchBloc => KiwiContainer().resolve<SearchBloc>();
+  ListpageBloc get listpageBloc => KiwiContainer().resolve<ListpageBloc>();
+
   MainPage() {
     searchController.addListener(() {
-      KiwiContainer().resolve<SearchBloc>().add(SearchRequested(searchController.text));
+      final text = searchController.text;
+      searchBloc.add(SearchRequested(text));
+      if (text.isEmpty) listpageBloc.add(ListpageRetry());
     });
   }
 
@@ -28,8 +33,8 @@ class MainPage extends StatelessWidget {
           appBar: appBar,
           body: MultiBlocProvider(
               providers: [
-                BlocProvider(create: (_) => KiwiContainer().resolve<SearchBloc>()),
-                BlocProvider(create: (_) => KiwiContainer().resolve<ListpageBloc>()),
+                BlocProvider(create: (_) => searchBloc),
+                BlocProvider(create: (_) => listpageBloc),
               ],
               child: BlocListener<ListpageBloc, ListpageState>(
               listener: (context, state) { if (state is ListpageShowBookDetails) openDetails(Utils.detailsFlex(context) != null, state.book); },

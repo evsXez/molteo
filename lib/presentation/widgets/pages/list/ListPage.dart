@@ -19,20 +19,22 @@ class ListPage extends StatelessWidget {
   }
 
   Widget get listOfBooks => BlocBuilder<SearchBloc, SearchState>(
-    builder: (context, state) {
-      if (state is SearchSuccessHasMore) return booksHasMore(state.books);
-      if (state is SearchSuccessFinalPage) return books(state.books);
-      if (state is SearchFailed) return booksFailedRetry(state.books);
-      return listBuilder;
-    }
+    builder: (context, searchState) => listBuilder(searchState)
   );
   
-  Widget get listBuilder => BlocBuilder<ListpageBloc, ListpageState>(
-    buildWhen: (previous, current) => current is ListpageInitial || current is ListpageLoadSuccess || current is ListpageLoadFailure,
-    builder: (context, state) {
-      if (state is ListpageInitial) return Center(child: CircularProgressIndicator());
-      if (state is ListpageLoadSuccess) return books(state.books);
-      if (state is ListpageLoadFailure) return RetryButton(() { listpageBloc.add(ListpageRetry()); });
+  Widget listBuilder(SearchState searchState) => BlocBuilder<ListpageBloc, ListpageState>(
+    // buildWhen: (previous, current) => current is ListpageInitial || current is ListpageLoadSuccess || current is ListpageLoadFailure,
+    builder: (context, listpageState) {
+      //first
+      if (listpageState is ListpageInitial) return Center(child: CircularProgressIndicator());
+      if (listpageState is ListpageLoadSuccess) return books(listpageState.books);
+      if (listpageState is ListpageLoadFailure) return RetryButton(() { listpageBloc.add(ListpageRetry()); });
+
+      //second
+      if (searchState is SearchSuccessHasMore) return booksHasMore(searchState.books);
+      if (searchState is SearchSuccessFinalPage) return books(searchState.books);
+      if (searchState is SearchFailed) return booksFailedRetry(searchState.books);
+
       return Container(color: Colors.red);
     },
   );
