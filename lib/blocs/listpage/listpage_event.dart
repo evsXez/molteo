@@ -13,11 +13,14 @@ class ListpageItemClicked extends ListpageEvent {
   @override List<Object> get props => [book];
 }
 
-class ListpageRetry extends ListpageEvent {}
+class ListpageRetryPressed extends ListpageEvent {}
 
 abstract class SearchEvent extends ListpageEvent {}
 
+///User cleared search field
 class SearchCleared extends SearchEvent {}
+
+///User typed somth in search field
 class SearchRequested extends SearchEvent {
   final String request;
   SearchRequested(this.request);
@@ -26,12 +29,14 @@ class SearchRequested extends SearchEvent {
   List<Object> get props => [request];
 }
 
+///User scrolled down the list
 class SearchRequestedMore extends SearchEvent {
   final double salt;
   SearchRequestedMore() : salt = Random().nextDouble();
   @override List<Object> get props => [salt];
 }
 
-class SearchRetry extends SearchEvent {}
+///User pressed got error loading next pages, pressed retry button
+class SearchRetryPressed extends SearchEvent {}
 
 

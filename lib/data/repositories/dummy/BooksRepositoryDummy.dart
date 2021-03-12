@@ -6,6 +6,7 @@ import 'package:molteo/data/models/SearchResponsePortion.dart';
 
 import '../BooksRepository.dart';
 
+///Dummy class for development purposes
 class BooksRepositoryDummy extends BooksRepository {
   
   List<BookInfoModel> _dummyList() {

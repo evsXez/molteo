@@ -17,13 +17,12 @@ class ListpageBloc extends Bloc<ListpageEvent, ListpageState> {
 
   final _searchData = _SearchData<BookInfoModel>();
 
-
   @override
   Stream<Transition<ListpageEvent, ListpageState>> transformEvents(Stream<ListpageEvent> events, transitionFn) {
    return events
-        .where((event) => (event is SearchRequested) ? event.request.length >= 3 : true)
-        .debounce(const Duration(milliseconds: 300)) //TODO: affects all events
-        // .distinct()
+        .where((event) => (event is SearchRequested) ? event.request.length >= 3 : true) //only 3+ symbols for search request allowed
+        .debounce(const Duration(milliseconds: 300)) //TODO: affects all events; don't search until user paused in typing
+        // .distinct() //doesn't work like this (search requests) with more than one event type
         .switchMap((transitionFn));
   }
 
@@ -39,15 +38,17 @@ class ListpageBloc extends Bloc<ListpageEvent, ListpageState> {
   Stream<ListpageState> mapEventToState(ListpageEvent event) async* {
     if (event is SearchRequested) yield* _onSearch(event.request);
     if (event is SearchRequestedMore) yield* _onSearchMore();
-    if (event is SearchRetry) yield* _onSearchRetry();
+    if (event is SearchRetryPressed) yield* _onSearchRetry();
 
     if (event is ListpageShown) yield* _onShown();
-    if (event is ListpageItemClicked) {
-      yield ListpageShowBookDetails(event.book);
-      detailspageBloc.add(DetailspageShown(event.book));
-    }
-    if (event is ListpageRetry) yield* _onRetry();
+    if (event is ListpageItemClicked) yield* _onItemClicked(event.book);
+    if (event is ListpageRetryPressed) yield* _onRetry();
     if (event is SearchCleared) yield* _onShown(clear: false);
+  }
+
+  Stream<ListpageState> _onItemClicked(BookInfoModel book) async* {
+    yield ListpageShowBookDetails(book);
+    detailspageBloc.add(DetailspageShown(book));
   }
 
   Stream<ListpageState> _onShown({bool clear = true}) async* {
@@ -104,7 +105,6 @@ class ListpageBloc extends Bloc<ListpageEvent, ListpageState> {
   }
 
 }
-
 
 
 class _SearchData<T> {

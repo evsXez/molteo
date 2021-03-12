@@ -6,8 +6,11 @@ import 'package:molteo/data/models/SearchResponsePortion.dart';
 import 'package:molteo/data/repositories/BooksRepository.dart';
 import 'package:dio/dio.dart';
 
+
+///Simple network implementation of [BooksRepository], can be extended with use of Data sources
 class BooksRepositoryNetwork extends BooksRepository {
 
+  //simple cache model
   final _cache = HashMap<String, DetailedBookInfoModel>();
 
   Dio _dio;

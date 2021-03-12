@@ -2,6 +2,7 @@ import 'package:molteo/data/models/BookInfoModel.dart';
 import 'package:molteo/data/models/DetailedBookInfoModel.dart';
 import 'package:molteo/data/models/SearchResponsePortion.dart';
 
+///Base class for repositories
 abstract class BooksRepository {
 
   Future<SearchResponsePortion<BookInfoModel>> searchBooks(String request, int page);

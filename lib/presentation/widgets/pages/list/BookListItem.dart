@@ -18,31 +18,22 @@ class BookListItem extends StatelessWidget {
     return Row(
       children: [
         image,
-        Expanded(child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Card(
-              child: InkWell(
-                onTap: onTap,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Stack(
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          title,
-                          subtitle,
-                          SizedBox(height: 8),
-                          Align(alignment: Alignment.centerRight, child: price),
-                        ]
-                      ),
-                    ]
-                  ),
-                ),
-              )
+        Expanded(child: Card(
+          child: InkWell(
+            onTap: onTap,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  title,
+                  subtitle,
+                  SizedBox(height: 8),
+                  Align(alignment: Alignment.centerRight, child: price),
+                ]
+              ),
             ),
-          ],
+          )
         )),
       ],
     );

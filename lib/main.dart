@@ -7,7 +7,6 @@ import 'package:molteo/dev/SimpleBlocObserver.dart';
 
 import 'blocs/listpage/listpage_bloc.dart';
 import 'data/repositories/BooksRepository.dart';
-import 'data/repositories/dummy/BooksRepositoryDummy.dart';
 import 'presentation/widgets/pages/main/MainPage.dart';
 
 void main() {
@@ -17,9 +16,10 @@ void main() {
 }
 
 void debug() {
-  Bloc.observer = SimpleBlocObserver();
+  Bloc.observer = SimpleBlocObserver(); //observer for logging events/states of Blocs
 }
 
+///Instantiates dependencies for DI container (KiwiContainer)
 void assemble() {
   // KiwiContainer().registerInstance<BooksRepository>(BooksRepositoryDummy());
   KiwiContainer().registerInstance<BooksRepository>(BooksRepositoryNetwork());

@@ -28,7 +28,7 @@ class ListPage extends StatelessWidget {
       
       if (state is ListpageInitial) return Center(child: CircularProgressIndicator());
       if (state is ListpageLoadSuccess) return books(state.books);
-      if (state is ListpageLoadFailure) return RetryButton(() { listpageBloc.add(ListpageRetry()); });
+      if (state is ListpageLoadFailure) return RetryButton(() { listpageBloc.add(ListpageRetryPressed()); });
 
       return Container(color: Colors.blue);
     },
@@ -53,7 +53,7 @@ class ListPage extends StatelessWidget {
     itemCount: data.length+1,
     itemBuilder: (context, index) {
       if (index < data.length) return BookListItem(data[index]);
-      return RetryButton(() { listpageBloc.add(SearchRetry()); });
+      return RetryButton(() { listpageBloc.add(SearchRetryPressed()); });
     }
   );
 

@@ -50,8 +50,8 @@ class _MainPageState extends State<MainPage> {
                   final BookInfoModel book = state is ListpageShowBookDetails ? state.book : null;
                   final flexPair = Utils.detailsFlex(context);
                   return flexPair == null
-                      ? ListPage()
-                      : Row(children: [
+                      ? ListPage() //one-page layout: phones and some tablets in vertical orientation
+                      : Row(children: [ //master-detail layout
                           Expanded(flex: flexPair.sum-flexPair.value, child: ListPage()),
                           Expanded(flex: flexPair.value, child: DetailsPage(book)),
                         ]);

@@ -94,7 +94,7 @@ class DetailsPage extends StatelessWidget {
     cubit: detailspageBloc,
     builder: (context, state) {
       if (state is DetailspageInitial) return progress;
-      if (state is DetailspageLoadFailure) return RetryButton(() => detailspageBloc.add(DetailspageRetry()));
+      if (state is DetailspageLoadFailure) return RetryButton(() => detailspageBloc.add(DetailspageRetryPressed()));
       if (state is DetailspageLoadSuccess) return BookDetails(state.bookDetails);
       return Container(color: Colors.red);
     }

@@ -20,7 +20,7 @@ class DetailspageBloc extends Bloc<DetailspageEvent, DetailspageState> {
   @override
   Stream<DetailspageState> mapEventToState(DetailspageEvent event) async* {
     if (event is DetailspageShown) yield* _onShown(event.book);
-    if (event is DetailspageRetry) yield* _onShown(_currentBook);
+    if (event is DetailspageRetryPressed) yield* _onShown(_currentBook);
   }
 
   Stream<DetailspageState> _onShown(BookInfoModel book) async* {
@@ -32,12 +32,6 @@ class DetailspageBloc extends Bloc<DetailspageEvent, DetailspageState> {
       yield DetailspageLoadFailure();
       addError(e);
     }
-  }
-
-  @override
-  Future<void> close() {
-    print("Details Bloc closed, no add()s anymore... ");
-    return super.close();
   }
 
 }
