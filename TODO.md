@@ -1,6 +1,6 @@
 # //TODO:
 
-- cache downloaded books
+> cache downloaded books
 - empty search request -> show new (add clear button)
 - refactor/clean?
 - make it nice

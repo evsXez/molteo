@@ -26,8 +26,14 @@ class BooksRepositoryNetwork extends BooksRepository {
   }
 
   @override
-  Future<SearchResponsePortion<BookInfoModel>> searchBooks(String request, int page) {
-    throw UnimplementedError();
+  Future<SearchResponsePortion<BookInfoModel>> searchBooks(String request, int page) async {
+    try {
+      final modifiedRequest = request; //TODO: remove spaces/add quotes/...
+      final response = await _dio.get("/search/$modifiedRequest/$page");
+      final list = _parseBooks(response.data);
+      final hasMore = !list.isEmpty;//response.total > 
+      return SearchResponsePortion(list, hasMore);
+    } catch (e) { rethrow; }
   }
 
   @override

@@ -4,6 +4,7 @@ import 'package:kiwi/kiwi.dart';
 import 'package:molteo/blocs/listpage/listpage_bloc.dart';
 import 'package:molteo/blocs/search/search_bloc.dart';
 import 'package:molteo/data/models/BookInfoModel.dart';
+import 'package:molteo/presentation/utils/Strings.dart';
 import 'package:molteo/presentation/widgets/BookListItem.dart';
 import 'package:molteo/presentation/widgets/common/RetryButton.dart';
 
@@ -36,9 +37,11 @@ class ListPage extends StatelessWidget {
     },
   );
 
-  Widget books(List<BookInfoModel> data) => ListView(
-    children: data.map((it) => BookListItem(it)).toList()
-  );
+  Widget books(List<BookInfoModel> data) => data.isEmpty 
+    ? Center(child: Text(Strings.label_no_results))
+    : ListView(
+      children: data.map((it) => BookListItem(it)).toList()
+    );
 
   Widget booksHasMore(List<BookInfoModel> data) => ListView.builder(
     itemCount: data.length+1,

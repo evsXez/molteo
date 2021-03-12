@@ -22,8 +22,8 @@ void debug() {
 }
 
 void assemble() {
-  KiwiContainer().registerInstance<BooksRepository>(BooksRepositoryDummy());
-  // KiwiContainer().registerInstance<BooksRepository>(BooksRepositoryNetwork());
+  // KiwiContainer().registerInstance<BooksRepository>(BooksRepositoryDummy());
+  KiwiContainer().registerInstance<BooksRepository>(BooksRepositoryNetwork());
 
   KiwiContainer().registerInstance<SearchBloc>(SearchBloc());
   KiwiContainer().registerInstance<ListpageBloc>(ListpageBloc());
