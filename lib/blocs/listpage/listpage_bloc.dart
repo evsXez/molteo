@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:equatable/equatable.dart';
 
 import 'package:bloc/bloc.dart';
 import 'package:kiwi/kiwi.dart';
@@ -20,6 +21,9 @@ class ListpageBloc extends Bloc<ListpageEvent, ListpageState> {
   BooksRepository get _booksRepository => KiwiContainer().resolve<BooksRepository>();
   DetailspageBloc get detailspageBloc => KiwiContainer().resolve<DetailspageBloc>();
 
+
+  
+
   @override
   Stream<ListpageState> mapEventToState(ListpageEvent event) async* {
     if (event is ListpageShown) yield* _onShown();
@@ -38,4 +42,8 @@ class ListpageBloc extends Bloc<ListpageEvent, ListpageState> {
     }
   }
 
+
+
 }
+
+

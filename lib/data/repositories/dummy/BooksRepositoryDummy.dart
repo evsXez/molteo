@@ -2,12 +2,13 @@ import 'dart:convert';
 
 import 'package:molteo/data/models/BookInfoModel.dart';
 import 'package:molteo/data/models/DetailedBookInfoModel.dart';
+import 'package:molteo/data/models/SearchResponsePortion.dart';
 
 import '../BooksRepository.dart';
 
 class BooksRepositoryDummy extends BooksRepository {
   
-  List<BookInfoModel> dummyList() {
+  List<BookInfoModel> _dummyList() {
     final obj = json.decode(_DUMMY_LIST);
     final List<dynamic> books = obj['books'];
     return books.map((it) => BookInfoModel.fromJson(it)).toList();
@@ -15,7 +16,7 @@ class BooksRepositoryDummy extends BooksRepository {
 
   @override
   Future<List<BookInfoModel>> getNewBooks() {
-    return Future.delayed(Duration(seconds: 2), () => dummyList());
+    return Future.delayed(Duration(seconds: 2), () => _dummyList());
   }
 
   @override
@@ -24,6 +25,14 @@ class BooksRepositoryDummy extends BooksRepository {
       DetailedBookInfoModel.fromJson(json.decode(_DUMMY_DETAILS))
     );
   }
+
+  @override
+  Future<SearchResponsePortion<BookInfoModel>> searchBooks(String request, int page) async {
+    return Future.delayed(Duration(seconds: 2), () =>
+      SearchResponsePortion(_dummyList(), true)
+    );
+  }
+
 
 }
 
@@ -80,30 +89,6 @@ const _DUMMY_LIST = r'''
 			"price": "$16.83",
 			"image": "https://itbook.store/img/books/9781722834920.png",
 			"url": "https://itbook.store/books/9781722834920"
-		},
-		{
-			"title": "Graph Databases For Beginners",
-			"subtitle": "The #1 Platform for Connected Data",
-			"isbn13": "1001606307637",
-			"price": "$0.00",
-			"image": "https://itbook.store/img/books/1001606307637.png",
-			"url": "https://itbook.store/books/1001606307637"
-		},
-		{
-			"title": "Elementary Algorithms",
-			"subtitle": "",
-			"isbn13": "1001606307729",
-			"price": "$0.00",
-			"image": "https://itbook.store/img/books/1001606307729.png",
-			"url": "https://itbook.store/books/1001606307729"
-		},
-		{
-			"title": "Windows PowerShell Networking Guide",
-			"subtitle": "",
-			"isbn13": "1001606307964",
-			"price": "$0.00",
-			"image": "https://itbook.store/img/books/1001606307964.png",
-			"url": "https://itbook.store/books/1001606307964"
 		}
 	]
 }

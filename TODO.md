@@ -1,8 +1,6 @@
 # //TODO:
 
-> implement network repository
-- sorting feature
-- search feature
+> search feature
 - error cases/retry/?
 - cache downloaded books
 - refactor/clean?
@@ -16,6 +14,7 @@
 
 ## DONE:
 
+- <s>implement network repository</s>
 - <s>tablet version</s>
 - <s>click on item -> open details page (show as much info as you can)</s>
 - <s>show book info</s>

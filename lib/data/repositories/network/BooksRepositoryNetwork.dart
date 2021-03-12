@@ -1,5 +1,6 @@
 import 'package:molteo/data/models/BookInfoModel.dart';
 import 'package:molteo/data/models/DetailedBookInfoModel.dart';
+import 'package:molteo/data/models/SearchResponsePortion.dart';
 import 'package:molteo/data/repositories/BooksRepository.dart';
 import 'package:dio/dio.dart';
 
@@ -25,6 +26,11 @@ class BooksRepositoryNetwork extends BooksRepository {
   }
 
   @override
+  Future<SearchResponsePortion<BookInfoModel>> searchBooks(String request, int page) {
+    throw UnimplementedError();
+  }
+
+  @override
   Future<DetailedBookInfoModel> getBookDetails(String isbn13) async {
     try {
       final response = await _dio.get("/books/$isbn13");
@@ -38,5 +44,4 @@ class BooksRepositoryNetwork extends BooksRepository {
   }
 
   DetailedBookInfoModel _parseBookDetails(Map<dynamic, dynamic> obj) => DetailedBookInfoModel.fromJson(obj);
-
 }
